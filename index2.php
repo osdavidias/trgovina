@@ -1,41 +1,25 @@
 <html>
 <head>
-<style type="text/css">
 
-h1 {
- 
-   color: red;
-   text-align: center;  
- 
-}
-
-body {
-
-	background-color: "D4D4D4";
-}
-
-table{
-    display:table;
-    
-    border-collapse: collapse;
-}
-
-#div1{
-  background-color: "ff6699";
-  font-weight: bold;
-}
-
-#div2
-{
-  background-color: "ccffff";
-}
-</style>
+<title>Trgovina - unos i pregled podataka</title>
+<meta charset="UTF-8">
+<meta name="description" content="Unos proizvoda i djelatnika u trgovinu i pregled">
+<meta name="keywords" content="Trgovina, djelatnici, proizvodi, pregled">
+<meta name="language" content="croatian">
 
 </head>
 
 
 
 <body>
+
+<?php
+
+include 'css.php';
+include 'connection.php';
+
+?>
+  
 <br>
 <h1>PREGLED DJELATNIKA PO TRGOVINAMA</h1>
 
@@ -56,7 +40,7 @@ table{
 if (isset($_POST["dugme"])) {
   
   $a=$_POST["trazi"];
-  $pdo=new PDO ('mysql:dbname=trgovina; host=localhost', "root", "");
+  $pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
   $query='SELECT * FROM djelatnici JOIN trgovine ON djelatnici.broj_trgovine
   =trgovine.broj_trgovine WHERE (sifra_djelatnika LIKE :b OR ime LIKE :b
   OR prezime LIKE :b OR telefon LIKE :b OR email LIKE :b OR mjesto LIKE :b OR adresa LIKE :b) ';
@@ -116,7 +100,7 @@ echo'</table>';
 
 <form method="post">
 <?php
-$pdo=new PDO ('mysql:dbname=trgovina; host=localhost', 'root', '');
+$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
 $query='SELECT sifra_djelatnika, ime, prezime, telefon, email, mjesto,
 adresa, postanski_broj FROM djelatnici JOIN trgovine
 ON trgovine.broj_trgovine=djelatnici.broj_trgovine';
@@ -158,7 +142,7 @@ unset($pdo);
 if (isset($_POST["brisi"])) {
 	
 
-$pdo=new PDO ('mysql:dbname=trgovina; host=localhost', "root", "");
+$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
 $query='DELETE  FROM djelatnici WHERE sifra_djelatnika ='.$_POST["brisi"];
 $result=$pdo->query($query);
 //$stmt->bindParam(1, $_POST["brisi"]);

@@ -2,21 +2,22 @@
 
 
 <head>
-<style type="text/css">
-h1 {
-	color: red;
-	text-align: center;
-}
-body {
-	background-color: "D4D4D4";
-}
 
-</style>
-
+<title>Trgovina - unos i pregled podataka</title>
+<meta charset="UTF-8">
+<meta name="description" content="Unos proizvoda i djelatnika u trgovinu i pregled">
+<meta name="keywords" content="Trgovina, djelatnici, proizvodi, pregled">
+<meta name="language" content="croatian">
 </head>
 
 
 <body>
+
+<?php
+include 'css.php';
+include 'connection.php';
+?>
+
 	<br>
 <h1> TRGOVINA </h1>
 
@@ -54,7 +55,7 @@ Trgovina u kojoj radi:
 try
 {
 
-	$pdo=new PDO('mysql:dbname=trgovina; host=localhost', 'root','');
+	$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
 }
 catch (PDOException $e) 
 {
@@ -90,7 +91,7 @@ Trgovina u kojoj se nalazi:
 try
 {
 
-	$pdo=new PDO('mysql:dbname=trgovina; host=localhost', 'root','');
+	$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
 }
 catch (PDOException $e) 
 {
@@ -127,7 +128,7 @@ unset($pdo);
 if (isset($_POST["dugme1"])) {
 
 	
-	$pdo=new PDO ('mysql:dbname=trgovina; host=localhost', "root", "");
+	$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
 	$stmt=$pdo->prepare('INSERT INTO trgovine (broj_trgovine, postanski_broj, mjesto, adresa)
 	VALUES  (?, ?, ?, ?)');
 	
@@ -143,7 +144,7 @@ if (isset($_POST["dugme1"])) {
 
 if (isset($_POST["dugme2"])) {
 	
-$pdo= new PDO ('mysql:dbname=trgovina; host=localhost', 'root', "");
+$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
 $query="INSERT INTO djelatnici VALUES (?, ?, ?, ?, ?, ?)";
 $stmt=$pdo->prepare($query);
 $stmt->bindParam(1, $_POST["sif_djelatnik"]);
@@ -161,7 +162,7 @@ unset($pdo);
 
 if (isset($_POST["dugme3"])) {
 	
-$pdo= new PDO ('mysql:dbname=trgovina; host=localhost', 'root', "");
+$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
 $query="INSERT INTO proizvodi (naziv, cijena, broj_trgovine) VALUES (?, ?, ? )";
 $stmt=$pdo->prepare($query);
 $stmt->bindParam(1, $_POST["naz_proizvod"]);
