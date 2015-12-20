@@ -1,11 +1,13 @@
+<!Doctype-html>
 <html>
 <head>
 
 <title>Trgovina - unos i pregled podataka</title>
+<link rel="stylesheet" type="text/css" href="css.css">
 <meta charset="UTF-8">
 <meta name="description" content="Unos proizvoda i djelatnika u trgovinu i pregled">
 <meta name="keywords" content="Trgovina, djelatnici, proizvodi, pregled">
-<meta name="language" content="croatian">
+
 
 </head>
 
@@ -15,7 +17,7 @@
 
 <?php
 
-include 'css.php';
+
 include 'connection.php';
 
 ?>
@@ -39,24 +41,22 @@ include 'connection.php';
 
 if (isset($_POST["dugme"])) {
   
-  $a=$_POST["trazi"];
-  $pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
-  $query='SELECT * FROM djelatnici JOIN trgovine ON djelatnici.broj_trgovine
-  =trgovine.broj_trgovine WHERE (sifra_djelatnika LIKE :b OR ime LIKE :b
-  OR prezime LIKE :b OR telefon LIKE :b OR email LIKE :b OR mjesto LIKE :b OR adresa LIKE :b) ';
+$a=$_POST["trazi"];
+$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
+$query='SELECT * FROM djelatnici JOIN trgovine ON djelatnici.broj_trgovine
+=trgovine.broj_trgovine WHERE (sifra_djelatnika LIKE :b OR ime LIKE :b
+OR prezime LIKE :b OR telefon LIKE :b OR email LIKE :b OR mjesto LIKE :b OR adresa LIKE :b) ';
   
+$stmt=$pdo->prepare($query);
 
-  
-  $stmt=$pdo->prepare($query);
-  
-  $stmt->bindValue(':b', '%'.$a.'%');
-  $stmt->execute();
+$stmt->bindValue(':b', '%'.$a.'%');
+$stmt->execute();
  
  $rezultat=$stmt->fetchAll(PDO::FETCH_OBJ);
 
 if (empty($rezultat) OR $rezultat== false)
 {
-  echo "<br><div id='div1'>NIŠTA NIJE PRONAĐENO!</div>";
+echo "<br><div id='div1'>NIŠTA NIJE PRONAĐENO!</div>";
 }
 
 else

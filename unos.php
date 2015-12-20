@@ -1,37 +1,39 @@
+<!Doctype-html>
 <html>
 
 
 <head>
 
 <title>Trgovina - unos i pregled podataka</title>
-<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css.css">
+<meta http-equiv="content-type" content="text/html; charset=utf-8"> 
 <meta name="description" content="Unos proizvoda i djelatnika u trgovinu i pregled">
 <meta name="keywords" content="Trgovina, djelatnici, proizvodi, pregled">
-<meta name="language" content="croatian">
+
 </head>
 
 
 <body>
 
 <?php
-include 'css.php';
+
 include 'connection.php';
 ?>
 
-	<br>
+<br>
 <h1> TRGOVINA </h1>
 
 
-<a href="index1.php"><h3>Pregled proizvoda</h3></a>
-<a href="index2.php"><h3>Pregled djelatnika</h3></a>
+<h3><a href="index1.php">Pregled proizvoda</a></h3>
+<h3><a href="index2.php">Pregled djelatnika</a></h3>
 
-<a href="index3.php"><h3>Pregled trgovina</h3></a>
+<h3><a href="index3.php">Pregled trgovina</a></h3>
 
 
 <br>
 <h3> Unesi podatke za trgovinu:</h3>
 <br>
-<form method="post">
+<form method="post" action="">
 Broj trgovine:
 <input type="text" name="br_trg"> <br>
 Mjesto:
@@ -39,12 +41,12 @@ Mjesto:
 Adresa:
 <input type="text" name="adresa"> <br>
 Poštanski broj:
-<input type="number" name="post_br"> <br>
+<input type="text" name="post_br"> <br>
 <input type="submit" name="dugme1" value="Pošalji">
 
 <h3>Unesi podatke za djelatnike:</h3>
 Šifra djelatnika:
-<input type="number" name="sif_djelatnik"> <br>
+<input type="text" name="sif_djelatnik"> <br>
 Ime:
 <input type="text" name="ime"> <br>
 Prezime: <input type="text" name="prezime"> <br>
@@ -52,15 +54,11 @@ Trgovina u kojoj radi:
 <select name="trg_rad">
 <?php
 
-try
-{
 
-	$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
-}
-catch (PDOException $e) 
-{
-	die("GREŠKA: Ne mogu se spojiti: ".$e->getMessage());
-}
+
+$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
+
+
 $query= "select broj_trgovine, mjesto, adresa FROM trgovine";
 if ($result=$pdo->query($query)) {
 	while ($row=$result->fetch() ) {
@@ -77,26 +75,21 @@ unset($pdo);
 ?>
 </select>
 <br>
-Telefon: <input type="number" name="telefon"> <br>
+Telefon: <input type="text" name="telefon"> <br>
 Email: <input type="text" name="email"> <br>
 <input type="submit" name="dugme2" value="Pošalji"> <br>
 
 <h3> Unesi podatke za proizvode: </h3>
 Naziv proizvoda: <input type="text" name="naz_proizvod"> <br>
-Cijena: <input type="number" name="cijena"> <br>
+Cijena: <input type="text" name="cijena"> <br>
 Trgovina u kojoj se nalazi: 
 <select name="trg_proizvod">
 <?php
 
-try
-{
+
 
 	$pdo=new PDO ("mysql:host=$host; dbname=$baza", $user, $pass);
-}
-catch (PDOException $e) 
-{
-	die("GREŠKA: Ne mogu se spojiti: ".$e->getMessage());
-}
+ 
 $query= "select broj_trgovine, mjesto, adresa FROM trgovine";
 if ($result=$pdo->query($query)) {
 	while ($row=$result->fetch() ) {
@@ -111,7 +104,7 @@ else {
 unset($pdo);
 
 ?>
-</select>
+<select>
 <br>
 <input type="submit" name="dugme3" value="Pošalji"> <br>
 

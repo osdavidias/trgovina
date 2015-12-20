@@ -1,6 +1,4 @@
-<html>
-<head>
-<style type="text/css">
+
 
 h1 {
  
@@ -16,7 +14,7 @@ body {
 
 table{
     display:table;
-    
+    border: 1px solid black;
     table-layout:fixed;
     border-collapse: collapse;
 }
@@ -30,12 +28,3 @@ table{
 {
   background-color: "ccffff";
 }
-</style>
-
-</head>
-
-<body>
-
-
-</body>
-</html>

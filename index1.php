@@ -1,3 +1,4 @@
+<!Doctype-html>
 <html>
 <head>
 
@@ -5,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="description" content="Unos proizvoda i djelatnika u trgovinu i pregled">
 <meta name="keywords" content="Trgovina, djelatnici, proizvodi, pregled">
-<meta name="language" content="croatian">
+<link rel="stylesheet" type="text/css" href="css.css">
 
 
 </head>
@@ -18,7 +19,7 @@
 <body>
 
 <?php
-include 'css.php';
+
 include 'connection.php';
 
 ?>
